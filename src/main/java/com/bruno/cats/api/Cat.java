@@ -14,6 +14,11 @@ public class Cat {
         this.weight = weight;
     }
 
+    public String setId(String id) {
+        this.id = id;
+        return id;
+    }
+
     public String getName() {
         return name;
     }

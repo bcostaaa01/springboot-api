@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class CatController {
@@ -26,7 +27,8 @@ public class CatController {
     }
 
     @PostMapping("/cats")
-    public Cat addCat(Cat cat) {
+    public Cat addCat(@RequestBody Cat cat) {
+        cat.setId(UUID.randomUUID().toString());
         db.put(cat.getId(), cat);
         return cat;
     }
