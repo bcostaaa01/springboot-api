@@ -1,8 +1,11 @@
 package com.bruno.cats.api;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class Cat {
 
     private String id;
+    @NotEmpty
     private String name;
     private String breed;
     private int weight;

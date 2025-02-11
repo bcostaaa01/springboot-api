@@ -1,6 +1,7 @@
 package com.bruno.cats.api;
 
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class CatController {
     }
 
     @PostMapping("/cats")
-    public Cat addCat(@RequestBody Cat cat) {
+    public Cat addCat(@RequestBody @Valid Cat cat) {
         cat.setId(UUID.randomUUID().toString());
         db.put(cat.getId(), cat);
         return cat;
