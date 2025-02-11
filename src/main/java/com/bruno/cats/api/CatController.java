@@ -1,9 +1,9 @@
 package com.bruno.cats.api;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,5 +18,25 @@ public class CatController {
     @GetMapping("/cats/{id}")
     public Cat getCats(@PathVariable String id) {
         return db.get(id);
+    }
+
+    @GetMapping("/cats")
+    public Map<String, Cat> getCats() {
+        return db;
+    }
+
+    @PostMapping("/cats")
+    public Cat addCat(Cat cat) {
+        db.put(cat.getId(), cat);
+        return cat;
+    }
+
+    @DeleteMapping("/cats/{id}")
+    public Cat deleteCat(@PathVariable String id) {
+        Cat cat = db.remove(id);
+        if (cat == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cat not found");
+        }
+        return cat;
     }
 }
